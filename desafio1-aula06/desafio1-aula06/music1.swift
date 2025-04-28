@@ -11,9 +11,23 @@ struct music1: View {
     var recebe: Song
     
     var body: some View {
-        VStack{
-            Text(")
+        VStack {
+            AsyncImage(url: URL(string: recebe.capa)) { image in
+                image
+                    .image?.resizable()
+                    .frame(width: 200, height: 200)
+            }
+            Text(recebe.nome)
+                .font(.title)
+                .foregroundStyle(Color.white)
+            Text(recebe.artist)
+                .font(.subheadline)
+                .foregroundStyle(Color.white)
+            Spacer()
         }
+        .padding()
+        .background(Color.black)
+        .ignoresSafeArea()
     }
 }
 

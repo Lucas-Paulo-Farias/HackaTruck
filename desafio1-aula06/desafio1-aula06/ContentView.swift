@@ -7,14 +7,15 @@
 
 import SwiftUI
 
+public struct Song: Identifiable {
+    public var id: Int
+    var nome: String
+    var artist: String
+    var capa: String
+}
+
 struct ContentView: View {
     
-    struct Song: Identifiable {
-        var id: Int
-        var nome: String
-        var artist: String
-        var capa: String
-    }
     
     var songs: [Song] = [
     Song(id: 1, nome: "Here Without You", artist: "3 Doors Down", capa: "https://lastfm.freetls.fastly.net/i/u/500x500/1bdb46d01f3f425cc210095b0ff0278c.jpg"),
@@ -65,19 +66,19 @@ struct ContentView: View {
                                 .foregroundStyle(Color.white)
                             Spacer()
                             }
-                        ForEach(songs) {Song in
-                            NavigationLink(destination: music1(recebe: Song)) { index in
+                        ForEach(songs) { Song in
+                            NavigationLink(destination: music1(recebe: Song)) {
                                 HStack{
-                                    AsyncImage(url: URL(string: index.capa)) {image in
+                                    AsyncImage(url: URL(string: Song.capa)) { image in
                                         image
                                             .image?.resizable()
                                             .frame(width: 60, height: 60)
                                     }
-                                    VStack{
-                                        Text(index.nome)
+                                    VStack {
+                                        Text(Song.nome)
                                             .foregroundStyle(Color.white)
                                             .multilineTextAlignment(.center)
-                                        Text(index.artist)
+                                        Text(Song.artist)
                                             .foregroundStyle(Color.white)
                                             .multilineTextAlignment(.center)
                                     }
@@ -89,19 +90,19 @@ struct ContentView: View {
                         }
                         ScrollView(.horizontal){
                             HStack{
-                                ForEach(music) { Song in
+                                ForEach(music) { song1 in
                                     VStack {
-                                        AsyncImage(url: URL(string: Song.capa)) {image in
+                                        AsyncImage(url: URL(string: song1.capa)) {image in
                                             image
                                                 .image?.resizable()
                                                 .frame(width: 100, height: 100)
                                         }
-                                        Text(Song.nome)
+                                        Text(song1.nome)
                                             .foregroundStyle(Color.white)
+                                        }
                                     }
                                 }
-                                }
-                        }
+                            }
                         }
                     }
                 }
@@ -111,190 +112,3 @@ struct ContentView: View {
     #Preview {
         ContentView()
     }
-
-/*                     AsyncImage(url: URL(string: "https://musicainstantanea.com.br/wp-content/uploads/2020/12/Capas.jpg")) {image in
- image
-     .image?.resizable()
-     .frame(width: 200, height: 200)
-}
-HStack{
- Text("HackaFM")
-     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-     .foregroundStyle(Color.white)
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://static.wikia.nocookie.net/universal-warriors/images/2/23/Denji.png/revision/latest/thumbnail/width/360/height/360?cb=20220824142312")){image in
-     image
-         .image?.resizable()
-     .frame(width: 25, height: 25)}
- Text("HackaSong")
-     .foregroundStyle(Color.white)
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://lastfm.freetls.fastly.net/i/u/500x500/1bdb46d01f3f425cc210095b0ff0278c.jpg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Here Without You - Acoustc Version")
-         .foregroundStyle(Color.white)
-     Text("3 Doors Down - Seventeon Days")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i.scdn.co/image/ab67616d0000b2735f1f51d14e8bea89484ecd1b")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Numb")
-         .foregroundStyle(Color.white)
-     Text("Linkin Park")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i.scdn.co/image/ab67616d00001e02754bfe5e22c2af35d6fdb0a5")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("I Don't Care")
-         .foregroundStyle(Color.white)
-     Text("Apocalyptica, Adam Gontier")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://upload.wikimedia.org/wikipedia/pt/3/33/Audioslave_-_Audioslave_%28%C3%A1lbum%29.jpg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Like a Stone")
-         .foregroundStyle(Color.white)
-     Text("Audioslave")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i1.sndcdn.com/artworks-000133960617-8yd8lp-t500x500.jpg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Stricken")
-         .foregroundStyle(Color.white)
-     Text("Disturbed")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i.scdn.co/image/ab67616d00001e022868c4713a3912fd476b42f1")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Kryptonite")
-         .foregroundStyle(Color.white)
-     Text("3 Doors Down")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://cdn-images.dzcdn.net/images/cover/bc844f574c47ba2f0db583115916472f/500x500.jpg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("If Today Was Your Last Day")
-         .foregroundStyle(Color.white)
-     Text("Nickelback")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://lastfm.freetls.fastly.net/i/u/500x500/7249664c3aa40ced039a6384a744d6a2.jpg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Comatose")
-         .foregroundStyle(Color.white)
-     Text("Skillet")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i.scdn.co/image/ab67616d0000b2730fa217105897ecfc5242b600")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("Zombie")
-         .foregroundStyle(Color.white)
-     Text("Bad Wolves")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPfH-JzwbKlv9SLbFYdKqOjZcdph-ZN9nbGGpyLo7IJJlnp6p-9OEa5GQPF_zY56-KjS4&usqp=CAU")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("The Diary of Jane - Single Version")
-         .foregroundStyle(Color.white)
-     Text("Breaking Benjamin")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-HStack{
- AsyncImage(url: URL(string: "https://i.discogs.com/_pR1m2Qqoypd4Y1fuoI6YMRjnaJww0lTp2RrdQZjk3s/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyMjA4/NDItMTI3MDc0OTU0/MC5qcGVn.jpeg")) {image in
-     image
-         .image?.resizable()
-         .frame(width: 60, height: 60)
-     
- }
- VStack{
-     Text("When I'm Gone")
-         .foregroundStyle(Color.white)
-     Text("3 Doors Down")
-         .foregroundStyle(Color.white)
- }
- Spacer()
-}
-*/
