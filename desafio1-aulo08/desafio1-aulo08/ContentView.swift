@@ -16,17 +16,27 @@ struct ContentView: View {
             ZStack{
                 Color.brown
                     .ignoresSafeArea()
+                VStack {
+                    Image("hogwarts")
+                        .resizable()
                 ScrollView {
-                    NavigationLink(destination: profView()) {
                         ForEach(viewModel.personagens) { index in
-                            VStack{
+                            NavigationLink(destination: profView(professor: index)) {
+                                HStack{
                                     AsyncImage(url: URL(string: index.image!)){ image in
                                         image
                                             .image?.resizable()
                                             .scaledToFill()
-                                            .frame(width: 80, height: 80)
+                                            .frame(width: 100, height: 100)
                                             .cornerRadius(50)
                                     }
+                                    
+                                    Text(index.name!)
+                                        .font(.title2)
+                                        .foregroundStyle(.white)
+                                        .padding()
+                                    Spacer()
+                                }
                             }
                         }
                     }

@@ -41,7 +41,6 @@
 		C45FCDE52DC140AF00B39F5E = {
 			isa = PBXGroup;
 			children = (
-				C45FCE052DC1579C00B39F5E /* profView.swift */,
 				C45FCDF02DC140AF00B39F5E /* desafio1-aulo08 */,
 				C45FCDEF2DC140AF00B39F5E /* Products */,
 			);
@@ -58,6 +57,7 @@
 		C45FCDF02DC140AF00B39F5E /* desafio1-aulo08 */ = {
 			isa = PBXGroup;
 			children = (
+				C45FCE052DC1579C00B39F5E /* profView.swift */,
 				C45FCDFF2DC1417800B39F5E /* Model.swift */,
 				C45FCE032DC1420200B39F5E /* ViewModel.swift */,
 				C45FCDF12DC140AF00B39F5E /* desafio1_aulo08App.swift */,
