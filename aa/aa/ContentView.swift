@@ -21,6 +21,7 @@ var mapa: [Location] = [
     Location(nome: "Cristo Redentor", foto: "https://lh3.googleusercontent.com/gps-cs-s/AB5caB_2UJ4gzb6xkel4mWw43rzkGkvHHyHxJ7kToldeMzn1udq58_oG5LJ7OkOL9QVpTMSfQlNeQPFbQbd6eH6uKVPDtRXKuAFslUlF-uEVZ2rfU4kQH0_q27SV_OzG67FBSNQpbbNLlw=s1360-w1360-h1020-rw", descricao: "Estatua do Cristo Redentor no Rio de Janeiro", latitude: -22.956, longitude: -43.201),
 ]
 
+
 struct SheetView: View {
     var location: Location
     
@@ -59,6 +60,10 @@ struct SheetView: View {
 
 struct ContentView: View {
     
+    @State var aux: [Location] = [
+        Location(nome: "", foto: "", descricao: "", latitude: 0, longitude: 0)
+
+    ]
     @State private var mostrarView: Bool = false
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -68,10 +73,11 @@ struct ContentView: View {
     var body: some View {
         VStack{
             Map(){
-                ForEach(mapa, id: \.self) { location in
-                    Annotation(location.nome, coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)){
+                ForEach(mapa, id: \.self) { index in
+                    Annotation(index.nome, coordinate: CLLocationCoordinate2D(latitude: index.latitude, longitude: index.longitude)){
                         Button{
                             mostrarView = true
+                            aux = Location
                         }label: {
                             Image(systemName: "mappin")
                                 .font(.title)
@@ -80,12 +86,13 @@ struct ContentView: View {
                                 .foregroundStyle(Color.yellow)
                                 .clipShape(.capsule)
                         }
-                        .sheet(isPresented: $mostrarView) {
-                                SheetView(location: location)
-                        }
+
                     }
                 }
             }
+            .sheet(isPresented: $mostrarView) {
+                    SheetView(location: aux)
+                }
         }
         }
     }
