@@ -11,7 +11,7 @@ class ViewModel: ObservableObject {
     @Published var apiOP: [OP] = []
 
 func fetch(){
-    guard let url = URL(string: "http://127.0.0.1:1880/LerAnime") else {
+    guard let url = URL(string: "http://127.0.0.1:1880/LerAnime"/*usar ip da rede 192.168.....:1880*/) else { 
         return
     }
     
