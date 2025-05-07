@@ -1,21 +1,45 @@
 //
 //  PersonagemView.swift
-//  desafio1-Aula09
+//  teste
 //
-//  Created by Turma01-3 on 07/05/25.
+//  Created by Absolut on 07/05/25.
 //
 
 import SwiftUI
 
 struct PersonagemView: View {
     
-    var person: OP
+    var person: Personagem
     
     var body: some View {
-        Text(person.personagens.nome!)
+        ZStack{
+            Color(.black)
+                .ignoresSafeArea()
+            VStack{
+
+                AsyncImage(url: URL(string: person.foto!)){image in
+                        image
+                            .image?.resizable()
+                            .scaledToFit()
+                    }
+                    Text("Nome:\(person.nome!)")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                    Text("Tripulação:\(person.tripulacao!)")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                    Text("Posição:\(person.posicao!)")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                    Text("Recompença: ฿ \(person.recompenca!)")
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .foregroundStyle(.white)
+
+            }
+        }
     }
 }
 
 #Preview {
-    PersonagemView(person: OP(nomeAnime: "", anoLancamento: 0, personagens: Personagem(nome: "", tripulacao: "", posicao: "", recompenca: 0, foto: "")))
+    PersonagemView(person: Personagem(nome: "", tripulacao: "", posicao: "", recompenca: 0, foto: ""))
 }
