@@ -10,7 +10,7 @@ import Foundation
 struct OP: Decodable, Hashable {
     let nomeAnime: String?
     let anoLancamento: Int?
-    let personagens: Personagem
+    let personagens: [Personagem]
 }
 
 struct Personagem: Decodable, Hashable {
