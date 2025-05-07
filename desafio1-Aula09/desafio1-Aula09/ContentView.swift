@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  desafio1-Aula09
+//  anime
 //
-//  Created by Turma01-3 on 07/05/25.
+//  Created by Absolut on 07/05/25.
 //
 
 import SwiftUI
@@ -21,14 +21,36 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                     ScrollView{
-                        ForEach(viewModel.apiOP, id: \.self ) {teste in
-                            NavigationLink(destination: PersonagemView(person: teste)) {
-                                HStack{
-                                    Text(teste.nomeAnime!)
-                                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                                        .foregroundStyle(.white)
-                                }
-                            }
+                        ForEach(viewModel.apiOP, id: \.self ) {anime in
+                            VStack{
+                                Text(anime.nomeAnime!)
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .foregroundStyle(.white)
+                                Text("Lançado em: \(String(anime.anoLancamento!))")
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .foregroundStyle(.white)
+                                Text("Lista personagens:")
+                                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                    .foregroundStyle(.white)
+                                    .padding()
+                                ForEach(anime.personagens, id: \.self) { pessoas in
+                                    NavigationLink(destination: PersonagemView(person: pessoas)) {
+                                        HStack{
+                                            AsyncImage(url: URL(string: pessoas.foto!)) {image in
+                                                image
+                                                    .image?.resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(50)
+                                            }
+                                            Text(pessoas.nome!)
+                                                .font(.title)
+                                                .foregroundStyle(.white)
+                                            Spacer()
+                                        }
+                                    }
+                                }}
+                            
                         }
                     }
                 }
