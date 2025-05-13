@@ -8,24 +8,54 @@
 import SwiftUI
 
 struct PaiView: View {
+@StateObject var viewmodelpai = ViewModelPai()
+    
     var body: some View {
-        ZStack {
-            Color.amarelo
-                .ignoresSafeArea()
-            VStack{
-                HStack {
-                    AsyncImage(url: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwr_zZjgvmu4BccwDNIHic8K5dyehw7cSYA&s")) {image in
-                        image.image?.resizable()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(50)
+        NavigationStack {
+            ZStack {
+                Color.amarelo
+                    .ignoresSafeArea()
+                ForEach(viewmodelpai.pais, id: \.self){ index in
+                    VStack{
+                        Spacer()
+                        Spacer()
+                        HStack {
+                            AsyncImage(url: URL(string: index.foto!)) {image in
+                                image.image?.resizable()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(50)
+                            }
+                            Text(index.nome!)
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                            Spacer()
+                            Image(systemName: "line.3.horizontal")
+                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        }
+                        Text("Crianças cadastradas")
+                            .padding()
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                        ForEach(index.criancas, id: \.self){ kids in
+                            NavigationLink(destination: CriancaView()){
+                                HStack{
+                                    AsyncImage(url: URL(string: kids.foto!)) {image in
+                                        image.image?.resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(50)
+                                    }
+                                    Text(kids.apelido!)
+                                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                        .foregroundColor(.black)
+                                }
+                                Spacer()
+                            }
+                            Spacer(minLength: 350)
+                        }
                     }
-                    Text("Nome do Pai")
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    Spacer()
-                    Image(systemName: "line.3.horizontal")
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 }
-                
+            }
+            .onAppear(){
+                viewmodelpai.fetch()
             }
         }
     }
