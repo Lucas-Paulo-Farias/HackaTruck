@@ -33,5 +33,7 @@ struct Pai: Decodable, Hashable {
 struct Crianca: Decodable, Hashable {
     let apelido: String?
     let foto: String?
+    let colegio: String?
+    let horario: String?
     let observacoes: String?
 }
