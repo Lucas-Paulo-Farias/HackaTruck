@@ -1,0 +1,28 @@
+[
+    {
+        "id": "9ef9b518e10cca9c",
+        "type": "cloudantplus in",
+        "z": "0f9ff55ca2d92582",
+        "name": "",
+        "cloudant": "efa384dbdab0a701",
+        "database": "igortelesteste02",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 340,
+        "y": 660,
+        "wires": [
+            [
+                "f55c86f71b0d870d"
+            ]
+        ]
+    },
+    {
+        "id": "efa384dbdab0a701",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "",
+        "useapikey": true
+    }
+]
