@@ -1,0 +1,33 @@
+//SOLUÇAO 1
+.onAppear {
+    Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+        viewModelPai.obterLocalizacaoDoMotorista()
+
+        if let loc = viewModelPai.locais.first {
+            latAux = loc.latitude
+            longAux = loc.longitude
+
+            position = MapCameraPosition.region(MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: latAux, longitude: longAux),
+                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
+        }
+    }
+}
+
+
+//SOLUÇÃO 2
+.onAppear {
+    viewModelPai.obterLocalizacaoDoMotorista()
+
+    // Atualização periódica da localização a cada 5 segundos
+    Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+        viewModelPai.obterLocalizacaoDoMotorista()
+    }
+}
+.onChange(of: viewModelPai.locais) { _, newLocais in
+    if let loc = newLocais.first {
+        position = MapCameraPosition.region(MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude),
+            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)))
+    }
+}
